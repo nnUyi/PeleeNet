@@ -32,7 +32,7 @@ class PeleeNet:
         
         self.layer = Layer()
         
-    def peleenet(self, input_x, k=32, num_init_channel=64, block_config=[3,4,8,6], bottleneck_width=[1,2,4,4], is_training=True, reuse=False):
+    def peleenet(self, input_x, k=32, num_init_channel=64, block_config=[3,4,8,6], bottleneck_width=[2,2,4,4], is_training=True, reuse=False):
         with tf.variable_scope(self.model_name) as scope:
             if reuse:
                 scope.reuse_variables()
@@ -102,9 +102,13 @@ class PeleeNet:
         self.loss = tf.reduce_mean(softmax_cross_entropy_with_logits(self.logits_train, self.one_hot_labels)) + self.config.weight_decay*self.weights_reg
         
         # optimizer
+        '''
         self.adam_optim = tf.train.AdamOptimizer(learning_rate=self.config.learning_rate,
                                                  beta1=self.config.beta1,
                                                  beta2=self.config.beta2).minimize(self.loss)
+        '''
+        self.rmsprop_optim = tf.train.RMSPropOptimizer(learning_rate=self.config.learning_rate,
+                                                       momentum=self.config.momentum).minimize(self.loss)
 
         # accuracy
         self.predicetion = tf.nn.softmax(self.logits_test, 1)
@@ -139,7 +143,7 @@ class PeleeNet:
         for epoch in range(self.config.epochs):
             for ite in tqdm(range(ites_per_epoch)):
                 images, labels = next(gen_data)
-                _, loss, accuracy, summaries = self.sess.run([self.adam_optim, self.loss, self.accuracy, self.summaries], feed_dict={
+                _, loss, accuracy, summaries = self.sess.run([self.rmsprop_optim, self.loss, self.accuracy, self.summaries], feed_dict={
                                                                                         self.input_train:images,
                                                                                         self.input_test:images,
                                                                                         self.one_hot_labels:labels
@@ -167,21 +171,21 @@ class PeleeNet:
             else:
                 print('fail to load model')
         
-        datasource = get_data(self.config.dataset, is_training=False)            
+        datasource = get_data(self.config.dataset, is_training=False)      
         gen_data = gen_batch_data(datasource, self.batchsize, is_training=False)
         ites_per_epoch = int(len(datasource.images)/self.batchsize)
         
-        accuracy = 0
+        accuracy = []
         for ite in range(ites_per_epoch):
             images, labels = next(gen_data)
             accuracy_per_epoch = self.sess.run([self.accuracy], feed_dict={
                                                                             self.input_test:images,
                                                                             self.one_hot_labels:labels
                                                                             })
-            accuracy = accuracy + accuracy_per_epoch[0]
+            accuracy.append(accuracy_per_epoch[0])
     
-        accuracy = float(accuracy) / float(ite+1)
-        print('--test epoch -- accuracy:{:.4f}'.format(accuracy))
+        acc = np.mean(accuracy)
+        print('--test epoch -- accuracy:{:.4f}'.format(acc))
         
     # load model
     def load_model(self):
