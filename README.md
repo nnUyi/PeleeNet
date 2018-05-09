@@ -1,11 +1,11 @@
 # PeleeNet
   - A tensorflow implement for PeleeNet described in [Pelee: A Real-Time Object Detection System on Mobile Devices](https://arxiv.org/pdf/1804.06882.pdf). This repo mainly focuses on **classification part**.
   
-  - architecture of peleenet
+  - Architecture of peleenet
   
   <p align='center'><img src='./figure/architecture_peleenet_classification.png'/></p>
   
-  - net block: stem block & dense block
+  - Net block: stem block & dense block
   
   <p align='center'><img src='./figure/net_block.png'/></p>
 
