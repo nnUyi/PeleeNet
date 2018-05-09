@@ -17,8 +17,6 @@
   - dense block
   <p align='center'><img src='./figure/dense_block.png'/></p>
   
-  - transition layer
-  <p align='center'><img src='./figure/transition_layer.png'/></p>
 # Configuration
   - GPU: Geforce GTX 1080Ti
   - ubuntu16.04
