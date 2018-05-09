@@ -29,7 +29,7 @@
   - cPickle
   - Pillow
   
-  **Notes**: **Python2.* is default**. If you have python with 3.* version, cifar10.py, cache.py dataset.py should be **replaced by files stored in python3 folder**. Any problems, you can email me!!!
+  **Notes**: **Python2 is default**. If you have python with 3.* version, cifar10.py, cache.py dataset.py should be **replaced by files stored in python3 folder**. Any problems, you can email me!!!
   
 # Repo Structure
   The following structure show the main frame of this repo.
