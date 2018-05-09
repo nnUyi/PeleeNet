@@ -1,4 +1,10 @@
-# coding=utf-8
+# coding='utf-8'
+'''
+    author: Youzhao Yang
+    date: 05/08/2018
+    github: https://github.com/nnuyi
+'''
+
 import random
 import numpy as np
 import cifar10
@@ -37,7 +43,7 @@ def get_data(data_type='mnist', is_training=True):
 
 def gen_data(datasource, is_training=True):
     while True:
-        indices = range(len(datasource.images))
+        indices = list(range(len(datasource.images)))
         random.shuffle(indices)
         if is_training:
             for i in indices:
