@@ -100,7 +100,7 @@
 
 ## Results
 ### Classification
-  - After training, you can see that the testing accuracy rate can reach to **89.6%**.
+  - After training, you can see that the testing accuracy rate can reach to **89.83%**.
   - loss function and training accuracy shows below:
     
     <p align='center'><img src='./figure/loss_and_accuracy.png'/></p>
