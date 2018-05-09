@@ -18,12 +18,12 @@ class Layer:
             with slim.arg_scope([slim.conv2d], weights_initializer=tf.truncated_normal_initializer(stddev=0.02),
                                                normalizer_fn=slim.batch_norm,
                                                activation_fn=tf.nn.relu) as s:
-                conv0 = slim.conv2d(input_x, num_init_channel, 3, 2, scope='stem_block_conv0')
+                conv0 = slim.conv2d(input_x, num_init_channel, 3, 1, scope='stem_block_conv0')
                 
                 conv1_l0 = slim.conv2d(conv0, int(num_init_channel/2), 1, 1, scope='stem_block_conv1_l0')
-                conv1_l1 = slim.conv2d(conv1_l0, num_init_channel, 3, 2, scope='stem_block_conv1_l1')
+                conv1_l1 = slim.conv2d(conv1_l0, num_init_channel, 3, 1, scope='stem_block_conv1_l1')
                 
-                maxpool1_r0 = slim.max_pool2d(conv0, 2, 2, scope='stem_block_maxpool1_r0')
+                maxpool1_r0 = slim.max_pool2d(conv0, 2, 1, padding='SAME', scope='stem_block_maxpool1_r0')
                 
                 filter_concat = tf.concat([conv1_l1, maxpool1_r0], axis=-1)
                 
@@ -86,9 +86,9 @@ class Layer:
                 global_avgpool = slim.avg_pool2d(input_x, filter_size, scope='global_avgpool')
                 
                 # dropout
-                dropout = slim.dropout(global_avgpool)
-                dropout = tf.reshape(dropout, [shape[0], -1])
-                logits = slim.fully_connected(dropout, num_class, scope='fc')
+                # dropout = slim.dropout(global_avgpool)
+                flatten = tf.reshape(global_avgpool, [shape[0], -1])
+                logits = slim.fully_connected(flatten, num_class, scope='fc')
                 
                 return logits
     
