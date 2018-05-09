@@ -1,6 +1,7 @@
 # PeleeNet
   - A tensorflow implement for PeleeNet described in [Pelee: A Real-Time Object Detection System on Mobile Devices](https://arxiv.org/pdf/1804.06882.pdf). This repo mainly focuses on **classification part**.
-  
+
+## Architecture in paper
   - Architecture of peleenet
   
   <p align='center'><img src='./figure/architecture_peleenet_classification.png'/></p>
@@ -9,6 +10,15 @@
   
   <p align='center'><img src='./figure/net_block.png'/></p>
 
+## Architecture in tensorboard
+  - stem block
+  <p align='center'><img src='./figure/stem_block.png'/></p>
+  
+  - dense block
+  <p align='center'><img src='./figure/dense_block.png'/></p>
+  
+  - transition layer
+  <p align='center'><img src='./figure/transition_layer.png'/></p>
 # Configuration
   - GPU: Geforce GTX 1080Ti
   - ubuntu16.04
