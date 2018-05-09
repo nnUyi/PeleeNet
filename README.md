@@ -23,13 +23,13 @@
 
 # Requirements
   - tensorflow >= 1.0
-  - python 2.7.*
+  - python 2.* or python 3.*
   - numpy
   - scipy
   - cPickle
   - Pillow
   
-  **Notes**: if you have python with 3.* version, cifar10.py should be replaced by [Hvass-Labs's codes](https://github.com/Hvass-Labs/TensorFlow-Tutorials) and do little adjustments. Any problems, you can email me!!!
+  **Notes**: if you have python with 3.* version, cifar10.py, cache.py dataset.py should be **replaced by files stored in python3 folder**. Any problems, you can email me!!!
   
 # Repo Structure
   The following structure show the main frame of this repo.
