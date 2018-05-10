@@ -38,6 +38,10 @@
   PeleeNet
   |———— data/                                 # store cifar10 dataset
           |———— cifar10/
+  |———— python/                               # python3 support
+          |———— cifar10.py              
+          |———— cache.py
+          |———— dataset.py
   |———— main.py                               # repo entry
   |———— PeleeNet.py                           # mobilenet class
   |———— layers.py                             # stem block, dense_block, transition_layer
